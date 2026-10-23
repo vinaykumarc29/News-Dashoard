@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import defaultImage from "../../assets/default new article image.png";
 
 function NewsCard({ article, isBookmarked, onToggleBookmark }) {
   const [copied, setCopied] = useState(false);
@@ -27,9 +28,9 @@ function NewsCard({ article, isBookmarked, onToggleBookmark }) {
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950">
-      {article.image && article.image !== "None" && (
+      
         <img
-          src={article.image}
+          src={article.image != "None" ? article.image : defaultImage}
           alt=""
           loading="lazy"
           className="h-48 w-full object-cover"
@@ -37,7 +38,7 @@ function NewsCard({ article, isBookmarked, onToggleBookmark }) {
             event.currentTarget.style.display = "none";
           }}
         />
-      )}
+      
 
       <div className="flex flex-1 flex-col p-4">
         <div className="mb-2 flex items-center justify-between gap-2 text-xs text-gray-500 dark:text-gray-400">

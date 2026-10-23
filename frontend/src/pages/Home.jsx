@@ -109,11 +109,12 @@ function Home({ theme, onToggleTheme }) {
         </div>
 
         {error && (
+
           <div
             role="alert"
-            className="mb-6 rounded-lg bg-red-50 p-4 text-red-700 dark:bg-red-950 dark:text-red-300"
+            className="mb-6 flex flex-col items-center rounded-lg bg-red-50 p-4 text-red-700 dark:bg-red-950 dark:text-red-300"
           >
-            <p>{error}</p>
+            <p className="text-center">{error}</p>
 
             <button
               type="button"
@@ -129,6 +130,7 @@ function Home({ theme, onToggleTheme }) {
               Try again
             </button>
           </div>
+
         )}
 
         {loading ? (
@@ -137,7 +139,7 @@ function Home({ theme, onToggleTheme }) {
               <NewsSkeleton key={index} />
             ))}
           </div>
-        ) : articles.length === 0 ? (
+        ) : articles.length && !error === 0 ? (
           <EmptyState
             title="No news found"
             message="Try another search, or return to the latest news."
@@ -176,27 +178,12 @@ function Home({ theme, onToggleTheme }) {
               />
             )}
 
-            {!hasMore && (
+            {(!hasMore && !error) && (
               <p className="py-8 text-center text-sm text-gray-500 dark:text-gray-400">
                 You've reached the end of the news.
               </p>
             )}
 
-            {/* Temporary manual test for pagination
-            <div className="flex justify-center py-4">
-              <button
-                type="button"
-                onClick={loadMore}
-                disabled={loadingMore || !hasMore}
-                className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                {loadingMore
-                  ? "Loading..."
-                  : hasMore
-                    ? "Load more test"
-                    : "No more news"}
-              </button>
-            </div> */}
           </>
         )}
       </main>
