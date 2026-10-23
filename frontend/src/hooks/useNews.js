@@ -1,6 +1,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { fetchNewsPage } from "../api/newsApi"
+import { fetchNewsPage , MAX_PAGES} from "../api/newsApi";
+
 
 function useNews() {
   const [articles, setArticles] = useState([]);
