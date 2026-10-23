@@ -75,10 +75,6 @@ function Home({ theme, onToggleTheme }) {
 
   // Search for news using the submitted keyword.
   function handleSearch() {
-    if(query.trim() === "") {
-      alert("Please enter a search query.");
-      return;
-    }
     searchNews(query);
   }
 
@@ -161,6 +157,14 @@ function Home({ theme, onToggleTheme }) {
               ))}
             </div>
 
+            {articles.length === 0 && (
+              <EmptyState
+                title="No news found"
+                message="Try another search, or return to the latest news."
+                actionLabel="Show latest news"
+                onAction={fetchLatest}
+              />)}
+
             {loadingMore && (
               <div
                 role="status"
@@ -178,7 +182,7 @@ function Home({ theme, onToggleTheme }) {
               />
             )}
 
-            {(!hasMore && !error) && (
+            {(!hasMore && !error && articles.length != 0) && (
               <p className="py-8 text-center text-sm text-gray-500 dark:text-gray-400">
                 You've reached the end of the news.
               </p>
